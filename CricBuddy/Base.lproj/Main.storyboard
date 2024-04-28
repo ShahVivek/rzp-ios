@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9o9-4l-Oqg">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="9bW-Hw-pWx">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="9o9-4l-Oqg" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yyq-fz-jyk">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Eyz-EL-cDC" kind="relationship" relationship="rootViewController" id="kyb-kG-qpg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cue-Ju-MgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-648" y="-2"/>
+        </scene>
+        <!--WebVC-->
+        <scene sceneID="z7y-mb-yWT">
+            <objects>
+                <viewController id="Eyz-EL-cDC" customClass="WebVC" customModule="AiWajeeh" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iWb-1I-coh">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="pda-bJ-h5K">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T97-Qv-Tak">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCm-VP-2Er">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="cnZ-vE-QoX">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="cnZ-vE-QoX" firstAttribute="top" secondItem="RCm-VP-2Er" secondAttribute="top" id="Fr8-EZ-Pdv"/>
+                                    <constraint firstAttribute="trailing" secondItem="cnZ-vE-QoX" secondAttribute="trailing" id="JRl-N2-2sv"/>
+                                    <constraint firstItem="cnZ-vE-QoX" firstAttribute="leading" secondItem="RCm-VP-2Er" secondAttribute="leading" id="mja-OV-mNA"/>
+                                    <constraint firstAttribute="bottom" secondItem="cnZ-vE-QoX" secondAttribute="bottom" id="oK7-Mc-8RR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4Q1-K4-DQn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RCm-VP-2Er" firstAttribute="top" secondItem="iWb-1I-coh" secondAttribute="top" id="3YS-XE-srI"/>
+                            <constraint firstItem="pda-bJ-h5K" firstAttribute="top" secondItem="iWb-1I-coh" secondAttribute="top" id="DBq-UW-HjI"/>
+                            <constraint firstItem="4Q1-K4-DQn" firstAttribute="trailing" secondItem="RCm-VP-2Er" secondAttribute="trailing" id="DaB-AR-rqZ"/>
+                            <constraint firstItem="pda-bJ-h5K" firstAttribute="leading" secondItem="4Q1-K4-DQn" secondAttribute="leading" id="Gz8-79-pO0"/>
+                            <constraint firstItem="4Q1-K4-DQn" firstAttribute="bottom" secondItem="T97-Qv-Tak" secondAttribute="bottom" id="PTY-o3-Ic2"/>
+                            <constraint firstAttribute="bottom" secondItem="RCm-VP-2Er" secondAttribute="bottom" id="Rx4-5f-nzX"/>
+                            <constraint firstItem="pda-bJ-h5K" firstAttribute="trailing" secondItem="4Q1-K4-DQn" secondAttribute="trailing" id="SS1-QK-Pg8"/>
+                            <constraint firstItem="T97-Qv-Tak" firstAttribute="top" secondItem="4Q1-K4-DQn" secondAttribute="top" id="VFa-Gd-xGA"/>
+                            <constraint firstItem="RCm-VP-2Er" firstAttribute="leading" secondItem="4Q1-K4-DQn" secondAttribute="leading" id="cDz-5P-skA"/>
+                            <constraint firstItem="4Q1-K4-DQn" firstAttribute="trailing" secondItem="T97-Qv-Tak" secondAttribute="trailing" id="qmV-2e-rho"/>
+                            <constraint firstAttribute="bottom" secondItem="pda-bJ-h5K" secondAttribute="bottom" id="tIy-Ff-ehf"/>
+                            <constraint firstItem="T97-Qv-Tak" firstAttribute="leading" secondItem="4Q1-K4-DQn" secondAttribute="leading" id="tKz-Er-nR4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Uab-zQ-RiJ"/>
+                    <connections>
+                        <outlet property="viewLoading" destination="RCm-VP-2Er" id="ZGj-km-Gzv"/>
+                        <outlet property="viewWebViewContainer" destination="T97-Qv-Tak" id="ZUA-va-hFE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rnW-bP-Y6M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="119.84732824427481" y="-2.1126760563380285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SplashScreen" width="375" height="812"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
