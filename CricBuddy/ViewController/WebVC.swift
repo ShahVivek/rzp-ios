@@ -20,9 +20,9 @@ class WebVC: UIViewController, WKUIDelegate, WKNavigationDelegate, UINavigationC
     }
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-      if let messageBody = message.body as? [AnyHashable:Any]{
-          debugPrint("messageBody ", messageBody)
-      }
+        if let messageBody = message.body as? [AnyHashable:Any]{
+            debugPrint("messageBody ", messageBody)
+        }
     }
     
     // MARK: View Controller Life Cycle
@@ -92,113 +92,113 @@ class WebVC: UIViewController, WKUIDelegate, WKNavigationDelegate, UINavigationC
     }
     
     // MARK: WebView Delegate Methods for child view
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if let url = navigationAction.request.url {
-            if shouldOpenInBrowser(url) {
-                debugPrint("should open in browser")
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                return nil;
-            }
-        }
-        if navigationAction.targetFrame == nil {
-            let popupWebView = WKWebView(frame: .zero, configuration: configuration)
-            popupWebView.navigationDelegate = self
-            popupWebView.uiDelegate = self
-            popupWebView.configuration.userContentController.add(self, name: "PaymentJSBridge")
-            webViewSite.addSubview(popupWebView)
-            popupWebView.translatesAutoresizingMaskIntoConstraints = false
-            let heightConstraint = popupWebView.heightAnchor.constraint(equalTo: webViewSite.heightAnchor, multiplier: 0.7)
-            heightConstraint.priority = .defaultHigh
-            NSLayoutConstraint.activate([
-                popupWebView.topAnchor.constraint(equalTo: webViewSite.topAnchor),
-                heightConstraint,
-                popupWebView.leadingAnchor.constraint(equalTo: webViewSite.leadingAnchor),
-                popupWebView.trailingAnchor.constraint(equalTo: webViewSite.trailingAnchor)
-            ])
-            popupWebView.addObserver(self, forKeyPath: "URL", options: .new, context: nil)
-            self.webViews.append(popupWebView)
-            return popupWebView
-        }
-        return nil
-    }
-    func webViewDidClose(_ webView: WKWebView) {
-        if (self.webViews.count > 0) {
-            let indexLast = self.webViews.count - 1
-            let webviewLast = self.webViews[indexLast]
-            webviewLast.removeObserver(self, forKeyPath: "URL");
-            webviewLast.removeFromSuperview()
-            self.webViews.remove(at: indexLast);
-        }
-    }
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let key = change?[NSKeyValueChangeKey.newKey] {
-            let urlString = "\(key)"
-            if urlString.contains("api.razorpay") && urlString.contains("callback") {
-                print("urlString \(urlString)")
-                if urlString.contains("status=failed") || urlString.contains("status=authorized") {
-//                    let indexLast = self.webViews.count - 1
-//                    let webviewLast = self.webViews[indexLast]
-//                    webviewLast.removeObserver(self, forKeyPath: "URL");
-//                    webviewLast.removeFromSuperview()
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//                        self.webViews.remove(at: indexLast);
-//                    }
-                }
-            }
-        }
-    }
+    //    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+    //        if let url = navigationAction.request.url {
+    //            if shouldOpenInBrowser(url) {
+    //                debugPrint("should open in browser")
+    //                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    //                return nil;
+    //            }
+    //        }
+    //        if navigationAction.targetFrame == nil {
+    //            let popupWebView = WKWebView(frame: .zero, configuration: configuration)
+    //            popupWebView.navigationDelegate = self
+    //            popupWebView.uiDelegate = self
+    //            popupWebView.configuration.userContentController.add(self, name: "PaymentJSBridge")
+    //            webViewSite.addSubview(popupWebView)
+    //            popupWebView.translatesAutoresizingMaskIntoConstraints = false
+    //            let heightConstraint = popupWebView.heightAnchor.constraint(equalTo: webViewSite.heightAnchor, multiplier: 0.7)
+    //            heightConstraint.priority = .defaultHigh
+    //            NSLayoutConstraint.activate([
+    //                popupWebView.topAnchor.constraint(equalTo: webViewSite.topAnchor),
+    //                heightConstraint,
+    //                popupWebView.leadingAnchor.constraint(equalTo: webViewSite.leadingAnchor),
+    //                popupWebView.trailingAnchor.constraint(equalTo: webViewSite.trailingAnchor)
+    //            ])
+    //            popupWebView.addObserver(self, forKeyPath: "URL", options: .new, context: nil)
+    //            self.webViews.append(popupWebView)
+    //            return popupWebView
+    //        }
+    //        return nil
+    //    }
+    //    func webViewDidClose(_ webView: WKWebView) {
+    //        if (self.webViews.count > 0) {
+    //            let indexLast = self.webViews.count - 1
+    //            let webviewLast = self.webViews[indexLast]
+    //            webviewLast.removeObserver(self, forKeyPath: "URL");
+    //            webviewLast.removeFromSuperview()
+    //            self.webViews.remove(at: indexLast);
+    //        }
+    //    }
+    //    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    //        if let key = change?[NSKeyValueChangeKey.newKey] {
+    //            let urlString = "\(key)"
+    //            if urlString.contains("api.razorpay") && urlString.contains("callback") {
+    //                print("urlString \(urlString)")
+    //                if urlString.contains("status=failed") || urlString.contains("status=authorized") {
+    //                    //                    let indexLast = self.webViews.count - 1
+    //                    //                    let webviewLast = self.webViews[indexLast]
+    //                    //                    webviewLast.removeObserver(self, forKeyPath: "URL");
+    //                    //                    webviewLast.removeFromSuperview()
+    //                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+    //                    //                        self.webViews.remove(at: indexLast);
+    //                    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     // MARK: WebView Delegate Methods
-    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        let alertController = UIAlertController(title: message, message: nil,preferredStyle: .alert);
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel) {
-            _ in completionHandler()}
-        );
-        self.present(alertController, animated: true, completion: {});
-    }
+    //    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+    //        let alertController = UIAlertController(title: message, message: nil,preferredStyle: .alert);
+    //        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel) {
+    //            _ in completionHandler()}
+    //        );
+    //        self.present(alertController, animated: true, completion: {});
+    //    }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print("Failed to load webpage: \(error.localizedDescription)")
     }
     
-    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            completionHandler(true)
-        }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-            completionHandler(false)
-        }))
-        present(alertController, animated: true, completion: nil)
-    }
+    //    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+    //        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+    //        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+    //            completionHandler(true)
+    //        }))
+    //        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+    //            completionHandler(false)
+    //        }))
+    //        present(alertController, animated: true, completion: nil)
+    //    }
     
-    func webView(_ webView: WKWebView,   prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
-        let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .alert)
-        alertController.addTextField { (textField) in
-            textField.text = defaultText
-        }
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            if let text = alertController.textFields?.first?.text {
-                completionHandler(text)
-            } else {
-                completionHandler(defaultText)
-            }
-        }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-            completionHandler(nil)
-        }))
-        present(alertController, animated: true, completion: nil)
-    }
+    //    func webView(_ webView: WKWebView,   prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
+    //        let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .alert)
+    //        alertController.addTextField { (textField) in
+    //            textField.text = defaultText
+    //        }
+    //        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+    //            if let text = alertController.textFields?.first?.text {
+    //                completionHandler(text)
+    //            } else {
+    //                completionHandler(defaultText)
+    //            }
+    //        }))
+    //        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+    //            completionHandler(nil)
+    //        }))
+    //        present(alertController, animated: true, completion: nil)
+    //    }
     
-    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        guard let serverTrust = challenge.protectionSpace.serverTrust else {
-            completionHandler(.cancelAuthenticationChallenge, nil)
-            return
-        }
-        let exceptions = SecTrustCopyExceptions(serverTrust)
-        SecTrustSetExceptions(serverTrust, exceptions)
-        completionHandler(.useCredential, URLCredential(trust: serverTrust));
-    }
+    //    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    //        guard let serverTrust = challenge.protectionSpace.serverTrust else {
+    //            completionHandler(.cancelAuthenticationChallenge, nil)
+    //            return
+    //        }
+    //        let exceptions = SecTrustCopyExceptions(serverTrust)
+    //        SecTrustSetExceptions(serverTrust, exceptions)
+    //        completionHandler(.useCredential, URLCredential(trust: serverTrust));
+    //    }
     
     func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
         if !ReachablityManager.isReachable() {
@@ -217,29 +217,23 @@ class WebVC: UIViewController, WKUIDelegate, WKNavigationDelegate, UINavigationC
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.targetFrame == nil {
-            // The link is intended to open in a new window/tab, Open the link in the system browser
-            if let url = navigationAction.request.url {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                decisionHandler(.cancel)
-                return
-            }
+        if let url = navigationAction.request.url,
+           !url.absoluteString.hasPrefix("http://"),
+           !url.absoluteString.hasPrefix("https://"),
+           UIApplication.shared.canOpenURL(url) {
+            // Have UIApplication handle the url (sms:, tel:, mailto:, ...)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            // Cancel the request (handled by UIApplication).
+            decisionHandler(.cancel)
         }
-        if let url = navigationAction.request.url, navigationAction.navigationType == .linkActivated {
-            // Check if the URL should be opened in the external browser
-            if shouldOpenInBrowser(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                decisionHandler(.cancel)
-            } else {
-                decisionHandler(.allow)
-            }
-        } else {
+        else {
+            // Allow the request.
             decisionHandler(.allow)
         }
     }
-    
-    func shouldOpenInBrowser(_ url: URL) -> Bool {
-        let urlString = url.absoluteString;
-        return urlString.contains("google.com") || urlString.contains("map")
-    }
+}
+
+func shouldOpenInBrowser(_ url: URL) -> Bool {
+    let urlString = url.absoluteString;
+    return urlString.contains("google.com") || urlString.contains("map")
 }
